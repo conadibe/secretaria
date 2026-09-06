@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CONADIBE 2026 — Convenção Nacional</title>
-<meta name="description" content="Portal oficial da CONADIBE — Conferência Bíblica 2026, Ministros, Obreiros e Secretaria Geral.">
+<title>CONADIBE — Convenção Nacional</title>
+<meta name="description" content="Portal oficial da CONADIBE — conferência bíblica, ministros, obreiros e Secretaria Geral.">
 <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVYE4Dq0DrhQaUBX5SAGsTEGEpqMG6aP37ZEBQsB-WCzCp33DcoNyqDYX0koM1s5TG5Y&usqp=CAU">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,16 +24,41 @@
         --conadibe-green: #0e9f6e;
         --conadibe-green-dark: #0b7a55;
     }
-    body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; color:#172033; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
     .conadibe-blue { color: var(--conadibe-blue); }
     .bg-conadibe-blue { background-color: var(--conadibe-blue); }
     .conadibe-green { color: var(--conadibe-green); }
     .bg-conadibe-green { background-color: var(--conadibe-green); }
+    .text-conadibe-blue { color: var(--conadibe-blue); }
+    .text-conadibe-green { color: var(--conadibe-green); }
+    .hover\:text-conadibe-blue:hover { color: var(--conadibe-blue); }
     .hover-bg-green:hover { background-color: var(--conadibe-green-dark); }
     .border-green-brand { border-color: var(--conadibe-green); }
 
-    .hero { background: radial-gradient(circle at 10% -10%, #163a6b 0%, #0d2d5a 45%, #082042 100%); }
+    .hero { background: radial-gradient(circle at 10% -10%, #1b497f 0%, #0d2d5a 46%, #071c3a 100%); }
     .blob { position: absolute; border-radius: 9999px; filter: blur(70px); opacity: 0.3; pointer-events: none; }
+
+    /* Carrossel principal — imagens carregadas de /assets/fotos/carrosel */
+    .hero-carousel { position:relative; overflow:hidden; border-radius:1.5rem; aspect-ratio:16/7; background:#081f41; box-shadow:0 30px 70px -28px rgba(0,0,0,.72); isolation:isolate; }
+    .hero-carousel::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(180deg,rgba(5,20,43,.03) 50%,rgba(5,20,43,.58) 100%); }
+    .carousel-track, .carousel-slide { position:absolute; inset:0; }
+    .carousel-slide { opacity:0; transform:scale(1.025); transition:opacity .65s ease,transform 5.5s ease; }
+    .carousel-slide.active { opacity:1; transform:scale(1); z-index:1; }
+    .carousel-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .carousel-control { position:absolute; top:50%; z-index:5; width:2.75rem; height:2.75rem; display:flex; align-items:center; justify-content:center; transform:translateY(-50%); border:1px solid rgba(255,255,255,.3); border-radius:999px; color:#fff; background:rgba(7,28,58,.55); backdrop-filter:blur(8px); transition:.2s ease; }
+    .carousel-control:hover { background:rgba(14,159,110,.92); transform:translateY(-50%) scale(1.04); }
+    .carousel-control.prev { left:1rem; }
+    .carousel-control.next { right:1rem; }
+    .carousel-dots { position:absolute; left:50%; bottom:1rem; z-index:5; display:flex; align-items:center; gap:.45rem; transform:translateX(-50%); }
+    .carousel-dot { width:.55rem; height:.55rem; border-radius:999px; background:rgba(255,255,255,.5); transition:.25s ease; }
+    .carousel-dot.active { width:1.65rem; background:#fff; }
+    .carousel-fallback { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; text-align:center; background:linear-gradient(135deg,#123c70,#0d2d5a 55%,#0b765c); }
+    .carousel-fallback img { width:5rem; height:5rem; border-radius:999px; object-fit:cover; box-shadow:0 12px 30px rgba(0,0,0,.28); }
+    .carousel-fallback[hidden], .carousel-ui[hidden] { display:none !important; }
+    .carousel-status { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    :focus-visible { outline:3px solid rgba(14,159,110,.52); outline-offset:3px; }
 
     .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
     @keyframes fadeInUp { from { opacity:0; transform: translateY(18px);} to {opacity:1; transform:translateY(0);} }
@@ -81,6 +106,17 @@
     input:checked + .toggle-slider { background: var(--conadibe-green); }
     input:checked + .toggle-slider:before { transform: translateX(18px); }
     input:disabled + .toggle-slider { opacity:.5; cursor:not-allowed; }
+
+    @media (max-width:640px) {
+        .hero-carousel { aspect-ratio:4/3; border-radius:1.1rem; }
+        .carousel-control { width:2.5rem; height:2.5rem; }
+        .carousel-control.prev { left:.65rem; }
+        .carousel-control.next { right:.65rem; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+        html { scroll-behavior:auto; }
+        *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    }
 </style>
 </head>
 <body class="min-h-screen">
@@ -99,7 +135,7 @@
                 <a href="#top" class="px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue conadibe-blue-hover rounded-lg hover:bg-gray-50">Início</a>
 
                 <div class="nav-item relative">
-                    <button class="nav-trigger px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue rounded-lg hover:bg-gray-50 flex items-center gap-1.5" onclick="toggleNavDropdown(this)">
+                    <button class="nav-trigger px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue rounded-lg hover:bg-gray-50 flex items-center gap-1.5" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
                         Sobre <i class="fa-solid fa-chevron-down text-[10px] nav-caret"></i>
                     </button>
                     <div class="nav-dropdown bg-white rounded-xl shadow-2xl border border-gray-100 py-2 mt-2">
@@ -109,7 +145,7 @@
                 </div>
 
                 <div class="nav-item relative">
-                    <button class="nav-trigger px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue rounded-lg hover:bg-gray-50 flex items-center gap-1.5" onclick="toggleNavDropdown(this)">
+                    <button class="nav-trigger px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue rounded-lg hover:bg-gray-50 flex items-center gap-1.5" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
                         Conferência 2026 <i class="fa-solid fa-chevron-down text-[10px] nav-caret"></i>
                     </button>
                     <div class="nav-dropdown bg-white rounded-xl shadow-2xl border border-gray-100 py-2 mt-2">
@@ -119,12 +155,11 @@
                 </div>
 
                 <div class="nav-item relative">
-                    <button class="nav-trigger px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue rounded-lg hover:bg-gray-50 flex items-center gap-1.5" onclick="toggleNavDropdown(this)">
+                    <button class="nav-trigger px-3 py-2 text-sm font-semibold text-gray-600 hover:text-conadibe-blue rounded-lg hover:bg-gray-50 flex items-center gap-1.5" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
                         Ministros <i class="fa-solid fa-chevron-down text-[10px] nav-caret"></i>
                     </button>
                     <div class="nav-dropdown bg-white rounded-xl shadow-2xl border border-gray-100 py-2 mt-2">
                         <a href="solicitacoes.html" class="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-conadibe-blue"><i class="fa-solid fa-headset conadibe-green mr-1"></i> Área de Solicitações</a>
-                        <a href="https://nextrisedev.github.io/AGE2026/checkin" class="block px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-conadibe-blue"><i class="fa-solid fa-qrcode conadibe-blue mr-1"></i> Fazer Check-in</a>
                     </div>
                 </div>
 
@@ -136,7 +171,7 @@
                 <a href="solicitacoes.html" class="hidden sm:flex bg-conadibe-green hover-bg-green text-white text-sm font-bold px-4 py-2.5 rounded-full shadow transition items-center gap-2">
                     <i class="fa-solid fa-headset"></i> Solicitações
                 </a>
-                <button id="btnMobileMenu" class="lg:hidden text-gray-600 text-xl w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-50" onclick="toggleMobileMenu()">
+                <button id="btnMobileMenu" class="lg:hidden text-gray-600 text-xl w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-50" onclick="toggleMobileMenu()" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -148,7 +183,7 @@
         <div class="px-4 py-3 space-y-1">
             <a href="#top" class="block py-2.5 text-sm font-semibold text-gray-700">Início</a>
 
-            <button class="w-full flex justify-between items-center py-2.5 text-sm font-semibold text-gray-700" onclick="toggleMobileSub(this)">
+            <button class="w-full flex justify-between items-center py-2.5 text-sm font-semibold text-gray-700" onclick="toggleMobileSub(this)" aria-expanded="false">
                 Sobre <i class="fa-solid fa-chevron-down text-xs"></i>
             </button>
             <div class="mobile-submenu pl-4">
@@ -156,7 +191,7 @@
                 <a href="#ministerios" class="block py-2 text-sm text-gray-500">Nossos Ministérios</a>
             </div>
 
-            <button class="w-full flex justify-between items-center py-2.5 text-sm font-semibold text-gray-700" onclick="toggleMobileSub(this)">
+            <button class="w-full flex justify-between items-center py-2.5 text-sm font-semibold text-gray-700" onclick="toggleMobileSub(this)" aria-expanded="false">
                 Conferência 2026 <i class="fa-solid fa-chevron-down text-xs"></i>
             </button>
             <div class="mobile-submenu pl-4">
@@ -164,12 +199,11 @@
                 <a href="#faq" class="block py-2 text-sm text-gray-500">Perguntas Frequentes</a>
             </div>
 
-            <button class="w-full flex justify-between items-center py-2.5 text-sm font-semibold text-gray-700" onclick="toggleMobileSub(this)">
+            <button class="w-full flex justify-between items-center py-2.5 text-sm font-semibold text-gray-700" onclick="toggleMobileSub(this)" aria-expanded="false">
                 Ministros <i class="fa-solid fa-chevron-down text-xs"></i>
             </button>
             <div class="mobile-submenu pl-4">
                 <a href="solicitacoes.html" class="block py-2 text-sm text-gray-500">Área de Solicitações</a>
-                <a href="https://nextrisedev.github.io/AGE2026/checkin" class="block py-2 text-sm text-gray-500">Fazer Check-in</a>
             </div>
 
             <a href="#contato" class="block py-2.5 text-sm font-semibold text-gray-700">Contato</a>
@@ -182,27 +216,30 @@
 </header>
 
 <!-- ============================== HERO ============================== -->
-<section id="top" class="hero relative overflow-hidden text-white">
+<section id="top" class="hero relative overflow-hidden text-white" aria-label="Destaques da CONADIBE">
     <div class="blob w-72 h-72 bg-conadibe-green top-[-40px] right-[-40px]"></div>
     <div class="blob w-96 h-96 bg-blue-400 bottom-[-100px] left-[-80px]"></div>
 
-    <div class="relative max-w-3xl mx-auto px-6 pt-16 pb-20 text-center">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVYE4Dq0DrhQaUBX5SAGsTEGEpqMG6aP37ZEBQsB-WCzCp33DcoNyqDYX0koM1s5TG5Y&usqp=CAU"
-             alt="Logo CONADIBE" class="h-20 mx-auto mb-6 fade-in-up rounded-full shadow-lg">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight fade-in-up delay-1">CONADIBE 2026</h1>
-        <p class="text-blue-100/80 mt-2 fade-in-up delay-1">Conferência Bíblica &middot; Secretaria Geral</p>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+        <div id="heroCarousel" class="hero-carousel fade-in-up" tabindex="0" aria-roledescription="carrossel" aria-label="Fotos e banners da CONADIBE">
+            <div id="carouselTrack" class="carousel-track"></div>
 
-        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 backdrop-blur-sm text-sm font-semibold px-5 py-2.5 rounded-full mt-6 fade-in-up delay-2">
-            <i class="fa-regular fa-calendar conadibe-green"></i> 05 a 09 de Julho de 2026
-        </div>
+            <div id="carouselFallback" class="carousel-fallback">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVYE4Dq0DrhQaUBX5SAGsTEGEpqMG6aP37ZEBQsB-WCzCp33DcoNyqDYX0koM1s5TG5Y&usqp=CAU" alt="Logo CONADIBE">
+                <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mt-5">CONADIBE</h1>
+                <p class="text-blue-100/80 mt-2">Conferência Bíblica · Secretaria Geral</p>
+            </div>
 
-        <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8 fade-in-up delay-3">
-            <a href="https://nextrisedev.github.io/AGE2026/checkin" class="bg-white text-conadibe-blue font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2">
-                <i class="fa-solid fa-qrcode"></i> Já sou inscrito — Check-in
-            </a>
-            <a href="solicitacoes.html" class="bg-conadibe-green hover-bg-green text-white font-bold px-6 py-3 rounded-full shadow-lg transition flex items-center justify-center gap-2">
-                <i class="fa-solid fa-headset"></i> Área de Solicitações
-            </a>
+            <div id="carouselUi" class="carousel-ui" hidden>
+                <button id="carouselPrev" type="button" class="carousel-control prev" aria-label="Ver banner anterior">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button id="carouselNext" type="button" class="carousel-control next" aria-label="Ver próximo banner">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <div id="carouselDots" class="carousel-dots" aria-label="Escolher banner"></div>
+            </div>
+            <p id="carouselStatus" class="carousel-status" aria-live="polite"></p>
         </div>
     </div>
 </section>
@@ -264,8 +301,8 @@
 <!-- ============================== CONFERÊNCIA / SETORES ============================== -->
 <section id="conferencia" class="bg-white border-y border-gray-100 py-16 scroll-mt-20">
     <div class="max-w-5xl mx-auto px-6">
-        <p class="text-xs font-bold conadibe-green uppercase tracking-widest mb-2">Credenciamento</p>
-        <h2 class="text-2xl md:text-3xl font-extrabold conadibe-blue mb-8">Data e Setores</h2>
+        <p class="text-xs font-bold conadibe-green uppercase tracking-widest mb-2">CONADIBE 2026</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold conadibe-blue mb-8">Organização por setores</h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="card-hover bg-gray-50 rounded-xl border border-gray-100 p-5">
                 <p class="text-xs font-bold conadibe-green mb-1">SETOR A</p>
@@ -319,10 +356,10 @@
         </div>
         <div class="faq-item bg-white border border-gray-100 rounded-xl shadow-sm">
             <button class="w-full flex justify-between items-center px-5 py-4 text-left font-semibold text-gray-700 text-sm" onclick="toggleFaqItem(this)">
-                Qual a data do evento? <i class="fa-solid fa-chevron-down text-xs text-gray-400 faq-caret transition"></i>
+                Quando foi a CONADIBE 2026? <i class="fa-solid fa-chevron-down text-xs text-gray-400 faq-caret transition"></i>
             </button>
             <div class="faq-answer px-5 text-sm text-gray-500">
-                <p class="pb-4">A Conferência Bíblica CONADIBE ocorrerá de 05 a 09 de Julho de 2026.</p>
+                <p class="pb-4">A Conferência Bíblica CONADIBE 2026 foi realizada de 05 a 09 de julho de 2026.</p>
             </div>
         </div>
         <div class="faq-item bg-white border border-gray-100 rounded-xl shadow-sm">
@@ -382,7 +419,7 @@
 </footer>
 
 <!-- ============================== BOTÃO FLUTUANTE DE DÚVIDAS ============================== -->
-<button onclick="toggleChat()" class="btn-floating fixed bottom-6 right-6 z-50 bg-conadibe-green hover-bg-green text-white font-bold p-4 rounded-full shadow-2xl transition transform flex items-center justify-center border-2 border-white">
+<button id="btnChat" onclick="toggleChat()" class="btn-floating fixed bottom-6 right-6 z-50 bg-conadibe-green hover-bg-green text-white font-bold p-4 rounded-full shadow-2xl transition transform flex items-center justify-center border-2 border-white" aria-controls="chatWindow" aria-expanded="false">
     <i class="fa-solid fa-question text-2xl"></i>
     <span class="btn-text-anim text-sm font-bold">Dúvidas? Clique aqui.</span>
 </button>
@@ -396,7 +433,7 @@
         <p class="text-sm text-gray-500 mb-4">Olá! Como podemos te ajudar?</p>
         <div id="options">
             <div class="chat-option" onclick="showAnswer('abertura')">Quando abrem as inscrições?</div>
-            <div class="chat-option" onclick="showAnswer('data')">Qual a data do evento?</div>
+            <div class="chat-option" onclick="showAnswer('data')">Quando foi a CONADIBE 2026?</div>
             <div class="chat-option" onclick="showAnswer('setor')">Qual meu setor (assento)?</div>
             <div class="chat-option" onclick="showAnswer('solicitacao')">Preciso corrigir meus dados</div>
             <button onclick="falarOrganizador()" class="w-full mt-4 bg-conadibe-green text-white py-2 rounded text-sm font-bold hover-bg-green flex items-center justify-center gap-2 shadow-md transition">
@@ -408,7 +445,7 @@
             <button onclick="resetChat()" class="text-xs underline mt-2 block text-gray-500">Voltar</button>
         </div>
         <div id="answer-data" class="chat-answer">
-            A Conferência Bíblica CONADIBE ocorrerá de <strong>05 a 09 de Julho de 2026</strong>.
+            A Conferência Bíblica CONADIBE 2026 foi realizada de <strong>05 a 09 de julho de 2026</strong>.
             <button onclick="resetChat()" class="text-xs underline mt-2 block text-gray-500">Voltar</button>
         </div>
         <div id="answer-setor" class="chat-answer">
@@ -441,10 +478,10 @@
 </div>
 
 <!-- ============================== MODAL PREFERÊNCIAS DE COOKIES ============================== -->
-<div id="modalCookies" class="hidden fixed inset-0 bg-black/60 z-[110] items-center justify-center p-4">
+<div id="modalCookies" class="hidden fixed inset-0 bg-black/60 z-[110] items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="tituloCookies">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
         <div class="p-5 border-b flex justify-between items-center">
-            <h3 class="font-bold conadibe-blue"><i class="fa-solid fa-cookie-bite conadibe-green mr-1"></i> Preferências de Cookies</h3>
+            <h3 id="tituloCookies" class="font-bold conadibe-blue"><i class="fa-solid fa-cookie-bite conadibe-green mr-1"></i> Preferências de Cookies</h3>
             <button onclick="fecharModalCookies()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
         <div class="p-5 space-y-4 max-h-[60vh] overflow-y-auto">
@@ -488,17 +525,174 @@
 
 <script>
     // ===================================================================
+    // CARROSSEL PRINCIPAL
+    // Para inserir fotos sem editar este HTML, use arquivos com nomes
+    // banner-01.jpg, banner-02.jpg... dentro de assets/fotos/carrosel.
+    // Também é possível declarar nomes personalizados em imagens.json.
+    // ===================================================================
+    const CAROUSEL_BASE = 'assets/fotos/carrosel/';
+    const CAROUSEL_INTERVALO = 5500;
+    let carouselItens = [];
+    let carouselAtual = 0;
+    let carouselTimer = null;
+
+    function carregarImagem(item) {
+        return new Promise(resolve => {
+            const arquivo = typeof item === 'string' ? item : item.arquivo;
+            if (!arquivo || arquivo.includes('..') || /^(?:https?:)?\/\//i.test(arquivo)) return resolve(null);
+            const imagem = new Image();
+            const linkInformado = typeof item === 'object' && item.link ? item.link.trim() : '';
+            const linkSeguro = /^(https?:\/\/|\/|#)/i.test(linkInformado) ? linkInformado : '';
+            imagem.onload = () => resolve({
+                arquivo,
+                alt: typeof item === 'object' && item.alt ? item.alt : 'Destaque CONADIBE',
+                link: linkSeguro
+            });
+            imagem.onerror = () => resolve(null);
+            imagem.src = CAROUSEL_BASE + arquivo;
+        });
+    }
+
+    async function buscarItensCarrossel() {
+        let configurados = [];
+        try {
+            const resposta = await fetch(CAROUSEL_BASE + 'imagens.json', { cache: 'no-store' });
+            if (resposta.ok) {
+                const dados = await resposta.json();
+                if (Array.isArray(dados)) configurados = dados;
+            }
+        } catch (erro) {
+            // O arquivo de configuração é opcional.
+        }
+
+        if (!configurados.length) {
+            const descobertos = [];
+            for (let numero = 1; numero <= 12; numero++) {
+                const sufixo = String(numero).padStart(2, '0');
+                const alternativas = ['webp', 'jpg', 'jpeg', 'png'].map(extensao => `banner-${sufixo}.${extensao}`);
+                const testes = await Promise.all(alternativas.map(carregarImagem));
+                const encontrado = testes.find(Boolean);
+                if (!encontrado) break;
+                descobertos.push(encontrado);
+            }
+            return descobertos;
+        }
+
+        const carregados = await Promise.all(configurados.map(carregarImagem));
+        return carregados.filter(Boolean);
+    }
+
+    function irParaSlide(indice, anunciar = true) {
+        if (!carouselItens.length) return;
+        carouselAtual = (indice + carouselItens.length) % carouselItens.length;
+        document.querySelectorAll('.carousel-slide').forEach((slide, i) => slide.classList.toggle('active', i === carouselAtual));
+        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            const ativo = i === carouselAtual;
+            dot.classList.toggle('active', ativo);
+            dot.setAttribute('aria-current', ativo ? 'true' : 'false');
+        });
+        if (anunciar) document.getElementById('carouselStatus').textContent = `Banner ${carouselAtual + 1} de ${carouselItens.length}`;
+    }
+
+    function pararCarrossel() {
+        window.clearInterval(carouselTimer);
+        carouselTimer = null;
+    }
+
+    function iniciarCarrossel() {
+        pararCarrossel();
+        if (carouselItens.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            carouselTimer = window.setInterval(() => irParaSlide(carouselAtual + 1, false), CAROUSEL_INTERVALO);
+        }
+    }
+
+    async function montarCarrossel() {
+        carouselItens = await buscarItensCarrossel();
+        if (!carouselItens.length) return;
+
+        const track = document.getElementById('carouselTrack');
+        const dots = document.getElementById('carouselDots');
+        const fallback = document.getElementById('carouselFallback');
+        const ui = document.getElementById('carouselUi');
+
+        carouselItens.forEach((item, indice) => {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            slide.setAttribute('role', 'group');
+            slide.setAttribute('aria-label', `${indice + 1} de ${carouselItens.length}`);
+
+            const imagem = document.createElement('img');
+            imagem.src = CAROUSEL_BASE + item.arquivo;
+            imagem.alt = item.alt;
+            imagem.decoding = 'async';
+            if (indice > 0) imagem.loading = 'lazy';
+
+            if (item.link) {
+                const link = document.createElement('a');
+                link.href = item.link;
+                link.appendChild(imagem);
+                slide.appendChild(link);
+            } else {
+                slide.appendChild(imagem);
+            }
+            track.appendChild(slide);
+
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'carousel-dot';
+            dot.setAttribute('aria-label', `Ver banner ${indice + 1}`);
+            dot.addEventListener('click', () => { irParaSlide(indice); iniciarCarrossel(); });
+            dots.appendChild(dot);
+        });
+
+        fallback.hidden = true;
+        if (carouselItens.length > 1) ui.hidden = false;
+        irParaSlide(0, false);
+        iniciarCarrossel();
+    }
+
+    document.getElementById('carouselPrev').addEventListener('click', () => { irParaSlide(carouselAtual - 1); iniciarCarrossel(); });
+    document.getElementById('carouselNext').addEventListener('click', () => { irParaSlide(carouselAtual + 1); iniciarCarrossel(); });
+
+    const heroCarousel = document.getElementById('heroCarousel');
+    heroCarousel.addEventListener('mouseenter', pararCarrossel);
+    heroCarousel.addEventListener('mouseleave', iniciarCarrossel);
+    heroCarousel.addEventListener('focusin', pararCarrossel);
+    heroCarousel.addEventListener('focusout', iniciarCarrossel);
+    heroCarousel.addEventListener('keydown', evento => {
+        if (evento.key === 'ArrowLeft') irParaSlide(carouselAtual - 1);
+        if (evento.key === 'ArrowRight') irParaSlide(carouselAtual + 1);
+    });
+
+    let toqueInicial = 0;
+    heroCarousel.addEventListener('touchstart', evento => { toqueInicial = evento.changedTouches[0].clientX; pararCarrossel(); }, { passive:true });
+    heroCarousel.addEventListener('touchend', evento => {
+        const distancia = evento.changedTouches[0].clientX - toqueInicial;
+        if (Math.abs(distancia) > 45) irParaSlide(carouselAtual + (distancia < 0 ? 1 : -1));
+        iniciarCarrossel();
+    }, { passive:true });
+
+    // ===================================================================
     // NAV DESKTOP (dropdown por clique)
     // ===================================================================
     function toggleNavDropdown(btn) {
         const item = btn.closest('.nav-item');
         const jaAberto = item.classList.contains('open');
-        document.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
-        if (!jaAberto) item.classList.add('open');
+        document.querySelectorAll('.nav-item.open').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!jaAberto) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+        }
     }
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.nav-item')) {
-            document.querySelectorAll('.nav-item.open').forEach(i => i.classList.remove('open'));
+            document.querySelectorAll('.nav-item.open').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+            });
         }
     });
 
@@ -506,12 +700,16 @@
     // NAV MOBILE
     // ===================================================================
     function toggleMobileMenu() {
-        document.getElementById('mobileMenu').classList.toggle('hidden');
+        const menu = document.getElementById('mobileMenu');
+        const botao = document.getElementById('btnMobileMenu');
+        menu.classList.toggle('hidden');
+        botao.setAttribute('aria-expanded', String(!menu.classList.contains('hidden')));
     }
     function toggleMobileSub(btn) {
         const sub = btn.nextElementSibling;
         sub.classList.toggle('open');
         btn.querySelector('i').classList.toggle('rotate-180');
+        btn.setAttribute('aria-expanded', String(sub.classList.contains('open')));
     }
 
     // ===================================================================
@@ -530,6 +728,7 @@
     function toggleChat() {
         const w = document.getElementById('chatWindow');
         w.style.display = w.style.display === 'block' ? 'none' : 'block';
+        document.getElementById('btnChat').setAttribute('aria-expanded', String(w.style.display === 'block'));
     }
     function showAnswer(id) {
         document.getElementById('options').style.display = 'none';
@@ -616,6 +815,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        montarCarrossel();
         const consent = obterConsentimento();
         if (consent) {
             aplicarConsentimento(consent);
